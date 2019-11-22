@@ -102,5 +102,6 @@ def filter_one(image):
     (T,Thresh2) = cv.threshold(Thresh3, 0, 255,cv.ADAPTIVE_THRESH_GAUSSIAN_C)
     (T, Thresh4) = cv.threshold(Thresh2, 30, 255, cv.CALIB_CB_ADAPTIVE_THRESH)
     img_result = Image.fromarray(Thresh4)
+    img_result.save(image_io, format='JPEG', quality=100)
     img_content = ContentFile(image_io.getvalue(), 'img.jpg')
     return img_content
