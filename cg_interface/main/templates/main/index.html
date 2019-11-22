@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <title>Processamento de imagem</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+        
+    </head>
+    <body>
+            <div class="ui inverted segment">
+                    <div class="ui inverted secondary menu">
+                        <a class="item" href="{% url 'index'%}">Home</a>
+                    </div>
+            </div>
+        <div class="pusher">
+            <div class="ui placeholder segment">
+                {% if form %}
+                <form class="ui form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label>Nome</label>
+                        {{form.name}}
+                    </div>
+                    <div class="field">
+                        <label>Upload</label>
+                        {{form.image}}
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+                {% endif %}
+            </div>
+            <div class="ui massive middle aligned divided list">
+                {% if images %}
+                {% for image in images%}
+                    <div class="item">
+                        <img class="ui avatar image" src="/media/{{image.image}}" alt="">
+                        <div class="content">
+                            <div class="header">
+                                {{image.name}}
+                            </div>
+                        </div>
+                        <div class="right floated content">
+                            <a href="{% url 'show_image' pk=image.pk %}" class="ui green button">Weed</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

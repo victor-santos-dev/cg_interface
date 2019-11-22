@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <title>Processamento de imagem</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    </head>
+    <body>
+            <div class="ui inverted segment">
+                <div class="ui inverted secondary menu">
+                    <a class="item" href="{% url 'index'%}">Home</a>
+                </div>
+            </div>
+            <div class="ui middle aligned center aligned grid">
+                <div class="row">
+                <div class="sixteen wide column">
+                    <form class="ui form" method='post'>
+                        {% csrf_token%}
+                        <div class="field">
+                            <label>Metodo</label>
+                            {{form.method_name}}
+                        </div>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <img class="ui top aligned medium image" src="/media/{{origin_image.image}}">
+                        <div class="content">
+                            {{origin_image.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% if related_images %}
+                        {% for image in related_images %}
+                            <div class="four wide column">
+                                <a class="ui small image" href="localhost:8000/media/images/{{image.image}}">
+                                    <img src="/media/{{image.image}}" alt="">
+                                </a>
+                                <div class="content">
+                                    <div class="header">
+                                        {{image.origin.name}} {{image.applied_method}}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+    </body>
+</html>
