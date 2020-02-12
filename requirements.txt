@@ -1,7 +1,7 @@
 backcall==0.1.0
 cycler==0.10.0
 decorator==4.4.1
-Django==2.2.7
+Django==2.2.10
 ipdb==0.12.2
 ipython==7.9.0
 ipython-genutils==0.2.0
